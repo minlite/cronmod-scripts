@@ -87,6 +87,17 @@ then
 busybox echo "Binding /sd-ext/$i to /data/$i" >> $LOG;
 busybox mount -o bind /sd-ext/$i /data/$i;
 fi;
+
+## Make additional binds for space
+busybox echo "Binding $i for additional space" >> $LOG;
+busybox mkdir /data/bind-$i;
+if [ -e /data/bind-$i]
+then
+busybox -o bind /data/bind-$i /data/$i;
+else
+busybox echo "Error making additional bind directory" >> $LOG;
+fi;
+
 done;
 
 ## Unmount /sd-ext, if swap2int is installed leave it mounted until it activates
