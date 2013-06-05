@@ -90,13 +90,12 @@ fi;
 
 ## Make additional binds for space
 busybox echo "Binding $i for additional space" >> $LOG;
-busybox mkdir /data/bind-$i;
-if [ -e /data/bind-$i]
+if [ ! -e /data/bind-$i ]
 then
-busybox -o bind /data/bind-$i /data/$i;
-else
-busybox echo "Error making additional bind directory" >> $LOG;
+busybox mkdir /data/bind-$i;
 fi;
+busybox mount -o bind /data/bind-$i /data/$i;
+
 
 done;
 
