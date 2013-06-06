@@ -94,9 +94,8 @@ if [ ! -e /data/bind-$i ]
 then
 busybox mkdir /data/bind-$i;
 fi;
+cp -RP /data/$i/* /data/bind-$i/;
 busybox mount -o bind /data/bind-$i /data/$i;
-
-
 done;
 
 ## Unmount /sd-ext, if swap2int is installed leave it mounted until it activates
